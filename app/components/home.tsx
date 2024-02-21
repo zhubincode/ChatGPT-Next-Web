@@ -189,9 +189,19 @@ export function Home() {
   useSwitchTheme();
   useLoadData();
   useHtmlLang();
+  const accessStore = useAccessStore();
 
   useEffect(() => {
-    console.log("[Config] got config from build time", getClientConfig());
+    // console.log("[Config] got config from build time", getClientConfig());
+    accessStore.update((access) => (access.useCustomConfig = true));
+    accessStore.update(
+      (access) => (access.openaiUrl = "https://openkey.cloud/"),
+    );
+    accessStore.update(
+      (access) =>
+        (access.openaiApiKey =
+          "sk-RuXXlVOOVqFMHlfv5940164339A44687Ba14C0687f536683"),
+    );
     useAccessStore.getState().fetch();
   }, []);
 
