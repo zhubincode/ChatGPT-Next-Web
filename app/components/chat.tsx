@@ -96,6 +96,7 @@ import { ExportMessageModal } from "./exporter";
 import { getClientConfig } from "../config/client";
 import { useAllModels } from "../utils/hooks";
 import { MultimodalContent } from "../client/api";
+import Verification from "./verification";
 
 const Markdown = dynamic(async () => (await import("./markdown")).Markdown, {
   loading: () => <LoadingIcon />,
@@ -1134,8 +1135,22 @@ function _Chat() {
     setAttachImages(images);
   }
 
+  const [praiseText, setPraiseText] = useState("");
+
+  useEffect(() => {
+    // 从 localStorage 中获取值
+    const storedText = localStorage.getItem("praiseMe");
+    if (storedText) {
+      setPraiseText(storedText);
+    }
+  }, []);
+
   return (
     <div className={styles.chat} key={session.id}>
+      {/* 密码验证页面添加 */}
+      {!praiseText.includes("朱斌") && (
+        <Verification setPraiseText={setPraiseText}></Verification>
+      )}
       <div className="window-header" data-tauri-drag-region>
         {isMobileScreen && (
           <div className="window-actions">
