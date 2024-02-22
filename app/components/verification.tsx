@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./verification.module.scss";
 import Typed from "typed.js";
 
-const Verification = ({ setPraiseText }) => {
+const Verification = ({ setPraiseText }: { setPraiseText: any }) => {
   const el = useRef(null);
   const [text, setText] = useState("");
 
@@ -22,12 +22,12 @@ const Verification = ({ setPraiseText }) => {
     };
   }, []);
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: { key: string; }) => {
     // 判断按下的键是否是回车键
     if (event.key === "Enter" && text) {
       if (text?.includes("朱斌")) {
         localStorage.setItem("praiseMe", text);
-        setPraiseText(text);
+        setPraiseText?.(text);
       }
     }
   };
