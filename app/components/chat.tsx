@@ -546,14 +546,14 @@ export function ChatActions(props: {
           });
         }}
       />
-
+      {/*
       <ChatAction
         onClick={() => setShowModelSelector(true)}
         text={currentModel}
         icon={<RobotIcon />}
-      />
+      /> */}
 
-      {showModelSelector && (
+      {/* {showModelSelector && (
         <Selector
           defaultSelectedValue={currentModel}
           items={models.map((m) => ({
@@ -570,7 +570,7 @@ export function ChatActions(props: {
             showToast(s[0]);
           }}
         />
-      )}
+      )} */}
     </div>
   );
 }
